@@ -1,0 +1,255 @@
+{% load crispy_forms_tags %}
+{% load bootstrap5 %}
+
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<title> Responsive Login and Signup Form </title>-->
+
+    <!-- CSS -->
+
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <style>/* Google Fonts - Poppins */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+     body{
+        background: black;
+     }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        height: 105vh;
+        width: 100rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        column-gap: 30px;
+    }
+
+    .form {
+        position: absolute;
+        max-width: 430px;
+        width: 100%;
+        padding: 30px;
+        border-radius: 6px;
+        background: #FFF;
+    }
+
+    .form.signup {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .forms.show-signup .form.signup {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .forms.show-signup .form.login {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    header {
+        font-size: 28px;
+        font-weight: 600;
+        color: #232836;
+        text-align: center;
+    }
+
+    form {
+        margin-top: 30px;
+    }
+
+    .form .field {
+        position: relative;
+        height: 50px;
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 6px;
+    }
+
+    .field input,
+    .field button {
+        height: 100%;
+        width: 100%;
+        border: none;
+        font-size: 16px;
+        font-weight: 400;
+        border-radius: 6px;
+    }
+
+    .field input {
+        outline: none;
+        padding: 0 15px;
+        border: 1px solid #CACACA;
+    }
+
+    .field input:focus {
+        border-bottom-width: 2px;
+    }
+
+    .eye-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: #8b8b8b;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    .field button {
+        color: #fff;
+        background-color: #0171d3;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .field button:hover {
+        background-color: #016dcb;
+    }
+
+    .form-link {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .form-link span,
+    .form-link a {
+        font-size: 14px;
+        font-weight: 400;
+        color: #232836;
+    }
+
+    .form a {
+        color: #0171d3;
+        text-decoration: none;
+    }
+
+    .form-content a:hover {
+        text-decoration: underline;
+    }
+
+    .line {
+        position: relative;
+        height: 1px;
+        width: 100%;
+        margin: 36px 0;
+        background-color: #d4d4d4;
+    }
+
+    .line::before {
+        content: 'Or';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #FFF;
+        color: #8b8b8b;
+        padding: 0 15px;
+    }
+
+    .media-options a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    a.facebook {
+        color: #fff;
+        background-color: #4267b2;
+    }
+
+    a.facebook .facebook-icon {
+        height: 28px;
+        width: 28px;
+        color: #0171d3;
+        font-size: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+    }
+
+    .facebook-icon,
+    img.google-img {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+    }
+
+    img.google-img {
+        height: 20px;
+        width: 20px;
+        object-fit: cover;
+    }
+
+    a.google {
+        border: 1px solid #CACACA;
+    }
+
+    a.google span {
+        font-weight: 500;
+        opacity: 0.6;
+        color: #232836;
+    }
+
+    @media screen and (max-width: 400px) {
+        .form {
+            padding: 20px 10px;
+        }
+
+    }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body style="background: black">
+{% if user.is_authenticated %}
+You are authenticated as {{user.username}}
+
+<a href="/logout/">LOGOUT</a>
+{% endif %}
+<section style="background: black" class="container forms">
+    <div class="form login">
+        <div class="form-content">
+            <header>Sign in</header>
+            <form action="#" method="post">{% csrf_token %}
+                {% if message %}
+                <p style="color: red">{{message}}</p>
+                {% endif %}
+                 <div class="">
+                         {% bootstrap_form_errors form %}
+
+                     {% bootstrap_field form.username show_label=False placeholder="Username"%}
+                        {% bootstrap_field form.password show_label=False palceholder="Password"%}</div>
+                <div style="margin-top: 5rem" class="field button-field">
+                    <button type="submit">Sign in</button>
+                </div>
+            </form>
+
+            <div class="form-link">
+                <span><a href="/signup/" class="link login-link">Sign up</a></span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- JavaScript -->
+<!--<script src="js/script.js"></script>-->
+</body>
+</html>

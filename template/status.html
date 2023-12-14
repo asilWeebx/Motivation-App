@@ -1,0 +1,299 @@
+{% load static %}
+{% load hitcount_tags %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'salom.css' %}">
+    <title>Document</title>
+</head>
+<body>
+<style>@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+* {
+    box-sizing: border-box;
+}
+
+
+h3 {
+    margin: 10px 0;
+}
+
+h6 {
+    margin: 5px 0;
+    text-transform: uppercase;
+}
+
+p {
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.card-container {
+
+    border-radius: 5px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+    color: #B3B8CD;
+    padding-top: 30px;
+    position: relative;
+    width: 350px;
+    max-width: 100%;
+    text-align: center;
+}
+
+.card-container .pro {
+    color: #231E39;
+    background-color: #FEBB0B;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 7px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.card-container .round {
+    border: 1px solid #03BFCB;
+    border-radius: 50%;
+    padding: 7px;
+    width: 100px;
+    height: 100px;
+}
+
+button.primary {
+    background-color: #03BFCB;
+    border: 1px solid #03BFCB;
+    border-radius: 3px;
+    color: #231E39;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    padding: 10px 25px;
+}
+
+button.primary.ghost {
+    background-color: transparent;
+    color: #02899C;
+}
+
+.skills {
+
+    text-align: left;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+.skills ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.skills ul li {
+    border: 1px solid #2D2747;
+    border-radius: 2px;
+    display: inline-block;
+    font-size: 12px;
+    margin: 0 7px 7px 0;
+    padding: 7px;
+}
+
+footer {
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer i {
+    color: red;
+}
+
+footer a {
+    color: #3c97bf;
+    text-decoration: none;
+}</style>
+<nav style="background: black" class="navbar navbar-expand-lg navbar-dark    bg-black">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}">MOTIV</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                </li>
+
+            </ul>
+            <form method="post" action="{% url 'search' %}">
+                {% csrf_token %}
+                <input style="background: black;color: white" name="search" type="text" class="form-control p-3"
+                       placeholder="Author name">
+                <button style="margin-top: -5.4rem;margin-left: 9.5rem;height: 3.5rem" type="submit"
+                        class="btn btn-primary px-4 krch">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </button>
+            </form>
+
+        </div>
+    </div>
+</nav>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+<div style="margin-left: 15rem">
+    <div class="card-container">
+        <span class="pro">Author</span>
+        <img class="round" src="{{ status.author.img.url }}" alt="user"/>
+        <h3>{{status.author.full_name}}</h3>
+        <p>{{ status.author.bio}}</p>
+        <div class="buttons">
+            <button class="primary ghost">
+                Status count: {{status_count}}
+            </button>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>
+            Created with  by
+            <a target="_blank" href="https://asilbek-yuldashev.uz">Asilbek Yuldashev</a>
+             </p>
+    </footer>
+</div>
+<div style="margin-top: -18rem;margin-left: 50rem"><div class="ag-format-container">
+        <div class="ag-courses_box">
+            <div class="ag-courses_item">
+                    <div class="ag-courses-item_title">
+                        <span>{{ status.text }}</span>
+                    </div>
+
+                    <div class="ag-courses-item_date-box">
+                        Author:
+                        <span class="ag-courses-item_date">
+              {{ status.author }} </span>
+                        <br>
+                       <div style="text-align: center"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+</svg> : {{ hits }}</div><br>
+                    </div>
+            </div>
+
+            </a>
+        </div>
+    </div></div>
+<div style="margin-top: 3rem" class="container">
+    {% if search %}
+
+    <div class="ag-format-container">
+        <div class="ag-courses_box">
+            {% for i in status %}
+
+            <div class="ag-courses_item">
+                <a href="{% url 'status' i.id %}" class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg">
+
+                    </div>
+
+                    <div class="ag-courses-item_title">
+                        <span>{{ i.text }}</span>
+                    </div>
+
+                    <div class="ag-courses-item_date-box">
+                        Author:
+                        <span class="ag-courses-item_date">
+              {{ i.author }} </span>
+                        <br> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+</svg> : {% get_hit_count for i %}
+                    </div>
+            </div>
+            </a>
+        </div>
+    </div>
+
+    {% endfor %}
+
+
+    {% else %}
+    <div class="ag-format-container">
+        <div class="ag-courses_box">
+            {% for i in page.object_list %}
+
+            <div class="ag-courses_item">
+                <a href="{% url 'status' i.id %}" class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
+
+                    <div id="textbox" class="ag-courses-item_title">
+                        <span>{{ i.text }}</span>
+                    </div>
+
+                    <div class="ag-courses-item_date-box">
+                        Author:
+                        <span class="ag-courses-item_date">
+              {{ i.author }} </span> <br> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+</svg> : {% get_hit_count for i %}
+                    </div>
+                </a>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    <p>Page: {{ page.number }}/{{ page.paginator.num_pages }}</p>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                {% if page.has_previous %}
+                <a class="page-link" href="{% url 'index' %}?page={{ page.previous_page_number }}">Previous</a>
+                {% endif %}
+            </li>
+            {% for num_page in page.paginator.page_range %}
+            {% if page.number == num_page %}
+            <li class="page-item"><a class="page-link" href="#">{{ num_page }}</a></li>
+            {% endif %}<br/>{% endfor %}
+            <li class="page-item">
+                {% if page.has_next %}
+                <a class="page-link" href="{% url 'index' %}?page={{ page.next_page_number }}">Next</a>
+                {% endif %}
+                <br><br><br>
+            </li>
+        </ul>
+    </nav>
+</div>
+<script src="{% static 'main.js' %}"></script>
+<script src="https://100dayscss.com/codepen/js/jquery.min.js"></script>
+<script src="https://codepen.io/fracturedNight/pen/exgzZg.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+        crossorigin="anonymous"></script>
+</html>

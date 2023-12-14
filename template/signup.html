@@ -1,0 +1,66 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <title>Document</title>
+</head>
+<script src="{% static 'script.js' %}"></script>
+<body>
+<!-- title -->
+<div class="box">
+    <h1 class="box__title">Motivation</h1>
+    <p class="box__p">Bu motivation app sizga motiv yetmagan payt bemalol olsangiz bo'ladi va yana qo'shsangizham</p>
+    <h1 style="margin-top: 1rem">Unda tezroq boshlay qolaylik</h1>
+</div>
+<!-- /title -->
+
+    {% if user.is_authenticated %}
+    You are authenticated as {{user.username}}
+    {% endif %}
+<!-- modal 1 -->
+<div style="margin-top: -34rem" class="box">
+    <a href="#m1-o" class="link-1" id="m1-c">Boshlash</a>
+    <a style="margin-top:1rem" href="/acc/login" class="link-1" id="m2-c">LOGIN</a>
+    <p class="box__info">Ro'yxatdan o'tish</p>
+
+    <div class="modal-container" id="m1-o" style="--m-background: transparent;">
+        <div class="modal">
+            <h1 class="modal__title">Tezroq boshlay qolaylik</h1>
+            <form method="post">
+                {% csrf_token %}
+                {% if message %}
+                    <p style="color: red">{{message}}</p>
+                    {% endif %}
+                <input style="" name="username" placeholder="Username" type="text">
+                <input style="" name="name" placeholder="First name" type="text">
+                <input style="" name="email" placeholder="Email" type="text">
+                <input style="" name="password1" placeholder="Password" type="password">
+                <input style="" name="password2" placeholder="Try again" type="password">
+                <button type="submit" class="modal__btn">Button &rarr;</button>
+                <a href="#m1-c" class="link-2"></a>
+            </form>
+        </div>
+    </div>
+    <div class="modal-container" id="m2-o" style="--m-background: transparent;">
+        <div class="modal">
+            <h1 class="modal__title">Log in</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="">{{ form }}</div>
+                <button type="submit" class="modal__btn">Button &rarr;</button>
+                <a href="#m1-c" class="link-2"></a>
+            </form>
+        </div>
+    </div>
+</div>
+<a href="https://abubakersaeed.netlify.app/designs/d8-modals" class="abs-site-link" rel="nofollow noreferrer"
+   target="_blank">abs/designs/d8-modals</a>
+</body>
+</html>
