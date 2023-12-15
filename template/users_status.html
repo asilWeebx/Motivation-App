@@ -10,7 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'salom.css' %}">
-    <title>Document</title>
+      <link rel="icon" href="{% static 'ccc.png' %}" type="image/gif"/>
+    <title>Motivation</title>
 </head>
 <body>
 <style>@import url('https://fonts.googleapis.com/css?family=Montserrat');
@@ -186,7 +187,7 @@ footer a {
   </div>
 </nav>
 
-<h1 class="text-center text-white mt-3" style="font-family: cursive">Users Status</h1>
+<h1 class="text-center text-white mt-4" style="font-family: cursive">Users Statuses</h1>
 {% if messages %}
 {% for message in messages %}
 {% if message.tags == 'error' %}

@@ -1,6 +1,6 @@
 {% load crispy_forms_tags %}
 {% load bootstrap5 %}
-
+{% load static%}
 <!DOCTYPE html>
 <!-- Coding by CodingLab | www.codinglabweb.com-->
 <html lang="en">
@@ -11,7 +11,8 @@
     <!--<title> Responsive Login and Signup Form </title>-->
 
     <!-- CSS -->
-
+  <link rel="icon" href="{% static 'ccc.png' %}" type="image/gif"/>
+    <title>Motivation</title>
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <style>/* Google Fonts - Poppins */
@@ -214,6 +215,30 @@
         }
 
     }
+    footer {
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer i {
+    color: red;
+}
+
+footer a {
+    color: #3c97bf;
+    text-decoration: none;
+}
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -222,6 +247,41 @@
 You are authenticated as {{user.username}}
 
 <a href="/logout/">LOGOUT</a>
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'error' %}
+<div class="alert bg-danger fade show w-25 float-end position-absolute" role="alert">
+    <div class="float-end ">{{ message }}</div>
+    <button type="button" class="btn-close float-start" data-bs-dismiss="alert"
+            aria-label="Close"></button>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<div class="alert bg-success fade show w-25 float-end position-absolute" role="alert">
+    <div class="float-end ">{{ message }}</div>
+    <button type="button" class="btn-close float-start" data-bs-dismiss="alert"
+            aria-label="Close"></button>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'warning' %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"
+            aria-label="Close"></button>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endif %}
 <section style="background: black" class="container forms">
     <div class="form login">
@@ -248,7 +308,16 @@ You are authenticated as {{user.username}}
 
     </div>
 </section>
-
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+    <div>
+        <footer>
+            <p>
+                Created with by
+                <a target="_blank" href="https://asilbek-yuldashev.uz">Asilbek Yuldashev</a>
+            </p>
+        </footer>
+    </div>
+</div>
 <!-- JavaScript -->
 <!--<script src="js/script.js"></script>-->
 </body>

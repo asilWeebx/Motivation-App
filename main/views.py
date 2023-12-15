@@ -69,8 +69,7 @@ def my_functional_view(request):
 
 def Logout(request):
     logout(request)
-    messages.error(request, "You are logout")
-    return redirect('index')
+    return redirect('login')
 
 def search(request):
     if request.method == "POST":

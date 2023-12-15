@@ -10,9 +10,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'salom.css' %}">
-    <title>Document</title>
+    <link rel="icon" href="{% static 'ccc.png' %}" type="image/gif"/>
+    <title>Motivation</title>
 </head>
 <body>
+<style>    footer {
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer i {
+    color: red;
+}
+
+footer a {
+    color: #3c97bf;
+    text-decoration: none;
+}</style>
 <nav style="background: black" class="navbar navbar-expand-lg navbar-dark    bg-black">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'index' %}">MOTIV</a>
@@ -107,7 +132,7 @@
 {% endif %}
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-<h1 class="text-center text-white" style="font-family: cursive">Status Add</h1>
+<h1 class="text-center text-white mt-4" style="font-family: cursive">Status Edit</h1>
 <div class="p-5">
     <form action="" class="form-control" method="post">
         {% csrf_token %}
@@ -116,7 +141,16 @@
     <button class="btn btn-primary mt-3" type="submit">Edit</button>
         </form>
 </div>
-
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+    <div>
+        <footer>
+            <p>
+                Created with by
+                <a target="_blank" href="https://asilbek-yuldashev.uz">Asilbek Yuldashev</a>
+            </p>
+        </footer>
+    </div>
+</div>
 
     <script src="{% static 'main.js' %}"></script>
 	<script src="https://100dayscss.com/codepen/js/jquery.min.js"></script>
