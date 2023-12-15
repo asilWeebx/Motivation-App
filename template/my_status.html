@@ -224,69 +224,8 @@ footer a {
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
       integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
-    <div>
-        <div class="card-container">
-            <span class="pro">Author</span>
-            <img class="round" src="{{ status.author.img.url }}" alt="user"/>
-            <h3>{{status.author.full_name}}</h3>
-            <p>{{ status.author.bio}}</p>
-            <div class="buttons">
-                <button class="primary ghost">
-                    Status count: {{status_count}}
-                </button>
-            </div>
+<div>
 
-        </div>
-
-        <footer>
-            <p>
-                Created with by
-                <a target="_blank" href="https://asilbek-yuldashev.uz">Asilbek Yuldashev</a>
-            </p>
-        </footer>
-    </div>
-    <div style="padding: 2rem ; text-align: center">
-
-        <div class="ag-courses_item">
-            <div class="ag-courses-item_title">
-                <span>{{ status.text }}</span>
-            </div>
-
-            <div class="ag-courses-item_date-box">
-                Author:
-                <span class="ag-courses-item_date">
-              {{ status.author }} </span>
-                <br>
-                <div style="text-align: center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-eye-fill" viewBox="0 0 16 16">
-                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                    </svg>
-                    : {{ hits }}
-                </div>
-                <br>
-                {% if fav %}
-                <a href="{% url 'favourites' status.id %}" class="btn btn-outline-danger">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-                        <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
-                    </svg>
-                    Remove from Favourite</a>
-                {% else %}
-                <a href="{% url 'favourites' status.id %}" class="btn btn-outline-danger">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-suit-heart" viewBox="0 0 16 16">
-                        <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
-                    </svg>
-                    Add to Favourite</a>
-                {% endif %}
-
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div style="" class="container">
     {% if search %}
@@ -302,7 +241,7 @@ footer a {
                     </div>
 
                     <div class="ag-courses-item_title">
-                        <span>{{ i.text|slice:40 }}</span>
+                        <span>{{ i.text|slice:45 }}</span>
                     </div>
                     <div class="ag-courses-item_date-box">
                         Author:
@@ -325,44 +264,67 @@ footer a {
 
 
     {% else %}
-    <div class="ag-format-container">
-        <div class="ag-courses_box">
-            {% for i in page.object_list %}
-
-            <div class="ag-courses_item">
-                <a href="{% url 'status' i.id %}" class="ag-courses-item_link">
-                    <div class="ag-courses-item_bg"></div>
-
-                    <div id="textbox" class="ag-courses-item_title">
-                        <span>{{ i.text|slice:45 }} <br><span style="color: gray">...еще</span></span>
-                    </div>
-
-                    <div class="ag-courses-item_date-box">
-                        Author:
-                        <span class="ag-courses-item_date">
-              {{ i.author }} </span> <br>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-eye-fill" viewBox="0 0 16 16">
-                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                        </svg>
-                        : {% get_hit_count for i %}
-
-
-                    </div>
-                </a>
+  <div class="mt-5" style="padding: 3rem ; text-align: center">
+{% for i in status %}
+        <div class="ag-courses_item">
+            <div class="ag-courses-item_title">
+                <span>{{ i.text }}</span>
             </div>
 
-            {% endfor %}
+            <div class="ag-courses-item_date-box">
+                Author:
+                <span class="ag-courses-item_date">
+              {{ i.author }} </span>
+                <br>
+                <div style="text-align: center">
+
+                </div>
+                <br>
+               </a>
+                <a href="{% url 'edit' i.id %}" class="btn btn-warning w-100"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+  <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+</svg></a>
+             <a data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn btn-danger w-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+</svg>
+                </a>
+
+                </a>
+            </div>
         </div>
     </div>
+
+{% endfor %}
+            </div>
+<!-- Modal -->
+<div class="bg-dark modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        {% for i in status %}
+      <div class="modal-body">
+        Are you sure you delete your Status?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        <a href="{% url 'delete' i.id %}" class="btn btn-success">Yes</a>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
     {% endif %}
     <p>Page: {{ page.number }}/{{ page.paginator.num_pages }}</p>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item">
                 {% if page.has_previous %}
-                <a class="page-link" href="{% url 'status' status.id %}?page={{ page.previous_page_number }}">Previous</a>
+                <a class="page-link" href="{% url 'my_status' %}?page={{ page.previous_page_number }}">Previous</a>
                 {% endif %}
             </li>
             {% for num_page in page.paginator.page_range %}
@@ -371,7 +333,7 @@ footer a {
             {% endif %}<br/>{% endfor %}
             <li class="page-item">
                 {% if page.has_next %}
-                <a class="page-link" href="{% url 'status' status.id %}?page={{ page.next_page_number }}">Next</a>
+                <a class="page-link" href="{% url 'my_status' %}?page={{ page.next_page_number }}">Next</a>
                 {% endif %}
                 <br><br><br>
             </li>

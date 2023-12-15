@@ -1,5 +1,6 @@
 {% load static %}
 {% load hitcount_tags %}
+{% load bootstrap5 %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -69,9 +70,6 @@
   </div>
 </nav>
 
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
-
 {% if messages %}
 {% for message in messages %}
 {% if message.tags == 'error' %}
@@ -107,87 +105,20 @@
 {% endif %}
 {% endfor %}
 {% endif %}
-<div class="container mt-5">
-{% if search %}
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-     <div class="ag-format-container">
-  <div class="ag-courses_box mt-5">
-      {% for i in status %}
+<h1 class="text-center text-white" style="font-family: cursive">Status Add</h1>
+<div class="p-5">
+    <form action="" class="form-control" method="post">
+        {% csrf_token %}
+       {% bootstrap_form form %}
 
-      <div class="ag-courses_item">
-      <a href="{% url 'status' i.id %}" class="ag-courses-item_link">
-        <div class="ag-courses-item_bg"></div>
-
-        <div class="ag-courses-item_title">
-            <span>{{ i.text|slice:30 }}<p style="color: #8b8b8b">...еще</p></span>
-        </div>
-
-        <div class="ag-courses-item_date-box">
-          Author:
-          <span class="ag-courses-item_date">
-              {{ i.author }} </span>
-            <br> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-</svg> : {% get_hit_count for i %}
-        </div>
-      </a>
-    </div>
-
-      {% endfor %}
-
-
-    {% else %}
-  <div class="ag-format-container">
-  <div class="ag-courses_box">
-      {% for i in page.object_list %}
-
-      <div class="ag-courses_item">
-      <a href="{% url 'status' i.id %}" class="ag-courses-item_link">
-        <div class="ag-courses-item_bg"></div>
-
-        <div id="textbox" class="ag-courses-item_title">
-            <span>{{ i.text|slice:41 }}<p style="color: #8b8b8b">...еще</p></span>
-        </div>
-
-        <div class="ag-courses-item_date-box">
-          Author:
-          <span class="ag-courses-item_date">
-              {{ i.author }} </span>
-            <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-</svg> : {% get_hit_count for i %}
-        </div>
-      </a>
-    </div>
-
-      {% endfor %}
-  </div>
+    <button class="btn btn-primary mt-3" type="submit">Edit</button>
+        </form>
 </div>
 
- {% endif %}
-<p>Page: {{ page.number }}/{{ page.paginator.num_pages }}</p>
-    <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item">
-        {% if page.has_previous %}
-      <a class="page-link" href="{% url 'index' %}?page={{ page.previous_page_number }}" >Previous</a>
-        {% endif %}
-    </li>
-  {% for num_page in page.paginator.page_range %}
-      {% if page.number == num_page %}
-    <li class="page-item"><a class="page-link" href="#">{{ num_page }}</a></li>
-{% endif %}<br/>{% endfor %}
-    <li class="page-item">
-        {% if page.has_next %}
-      <a class="page-link" href="{% url 'index' %}?page={{ page.next_page_number }}">Next</a>
-        {% endif %}
-    </li>
-  </ul>
-</nav>
-</div>
-<script src="{% static 'main.js' %}"></script>
+
+    <script src="{% static 'main.js' %}"></script>
 	<script src="https://100dayscss.com/codepen/js/jquery.min.js"></script>
     <script src="https://codepen.io/fracturedNight/pen/exgzZg.js"></script>
 </body>

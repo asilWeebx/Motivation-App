@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     img = models.ImageField(upload_to="images/")
+    count = models.BooleanField(default=True)
 
 
 class Authors(models.Model):
@@ -29,6 +30,19 @@ class Status(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     text = models.TextField()
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
+    favourites = models.ManyToManyField(User, related_name='favourite', default=None, blank=True)
 
     def __str__(self):
         return self.author.full_name
+
+
+class StatusUser(models.Model):
+    text = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+
+
+    def __str__(self):
+        return self.text
+
