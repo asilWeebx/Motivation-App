@@ -20,14 +20,16 @@ from hitcount.utils import get_hitcount_model
 def index(request):
     category = Category.objects.all()
     status = Status.objects.all()
-    page = Paginator(status, 8)
+    status_count = Status.objects.all().count()
+    page = Paginator(status, 9)
     page_list = request.GET.get('page')
     page = page.get_page(page_list)
 
     ctx = {
         'status':status,
         'page':page,
-        'category':category
+        'category':category,
+        "status_count":status_count
     }
 
 
@@ -102,7 +104,7 @@ def status(request,id):
     status_count = Status.objects.filter(
         Q(author__full_name__icontains=status.author)
     ).count()
-    page = Paginator(athor_status, 3)
+    page = Paginator(athor_status, 9)
     page_list = request.GET.get('page')
     page = page.get_page(page_list)
     print(athor_status)
@@ -131,7 +133,7 @@ def favourite(request, id):
 def sevimli(request):
     category = Category.objects.all()
     new = Status.objects.filter(favourites=request.user)
-    page = Paginator(new, 6)
+    page = Paginator(new, 9)
     page_list = request.GET.get('page')
     page = page.get_page(page_list)
 
@@ -145,7 +147,7 @@ def category_filter(request, id):
     category = Category.objects.all()
     page_cat = Category.objects.get(id=id)
     status = Status.objects.filter(category_id=id)
-    page = Paginator(status, 3)
+    page = Paginator(status, 9)
     page_list = request.GET.get('page')
     page = page.get_page(page_list)
     ctx = {

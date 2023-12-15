@@ -281,7 +281,7 @@ footer a {
                     </div>
 
                     <div class="ag-courses-item_title">
-                        <span>{{ i.text }}</span>
+                        <span>{{ i.text|slice:40 }}<span style="color: gray">...еще</span></span>
                     </div>
                     <div class="ag-courses-item_date-box">
                         Author:
@@ -313,7 +313,7 @@ footer a {
                     <div class="ag-courses-item_bg"></div>
 
                     <div id="textbox" class="ag-courses-item_title">
-                        <span>{{ i.text }}</span>
+                        <span>{{ i.text|slice:40 }} <span style="color: gray">...еще</span></span>
                     </div>
 
                     <div class="ag-courses-item_date-box">
