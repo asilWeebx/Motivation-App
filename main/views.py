@@ -252,9 +252,9 @@ def edit(request,id):
     return render(request, 'edit.html',ctx)
 
 def delete(request, id):
-    status = StatusUser.objects.get(id=id)
     request.user.count = True
     request.user.save()
+    status = StatusUser.objects.get(id=id)
     status.delete()
     messages.success(request, "Your status successfuly deleted")
     return redirect('index')
